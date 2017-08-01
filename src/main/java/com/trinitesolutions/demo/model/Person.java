@@ -25,6 +25,14 @@ public class Person extends AbsEntity{
         return age;
     }
 
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     public void setAge(Integer age) {
         this.age = age;
     }

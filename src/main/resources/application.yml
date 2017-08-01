@@ -1,0 +1,15 @@
+#
+# [ Database Configuration Section ]
+#
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/boot
+    username: dbadmin
+    password: dl123
+    platform: POSTGRESQL
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+server:
+  port: 8081

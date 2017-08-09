@@ -1,6 +1,7 @@
 package com.trinitesolutions.demo.controller;
 
 
+import com.trinitesolutions.demo.exception.NormalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,4 +24,12 @@ public class HelloController {
         return "hi "+ content;
     }
 
+    @GetMapping("/hi2")
+    public String hi2( String content2) throws Exception{
+        logger.info(content2);
+        if(content2.equals("12")) {
+            throw new NormalException(1, "haha err...");
+        }
+        return "hi "+ content2;
+    }
 }

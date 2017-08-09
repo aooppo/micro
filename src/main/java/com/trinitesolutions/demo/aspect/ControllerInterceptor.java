@@ -1,21 +1,28 @@
 package com.trinitesolutions.demo.aspect;
 
+import com.trinitesolutions.demo.exception.NormalException;
+import com.trinitesolutions.demo.vo.Result;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Enumeration;
 
 @Aspect
-@Configuration
+@Component
 public class ControllerInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(ControllerInterceptor.class);
+    public static final String DEFAULT_ERROR_VIEW = "error";
 
     @Pointcut("execution(* com.trinitesolutions.demo.controller.*.*(..))")
     public void controlService(){}
@@ -33,8 +40,7 @@ public class ControllerInterceptor {
     }
 
     @Around(value = "controlService()")
-    public Object aroundProcess(ProceedingJoinPoint thisJoinPoint){
-        try {
+    public Object aroundProcess(ProceedingJoinPoint thisJoinPoint) throws Throwable {
             ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
             HttpServletRequest request = attributes.getRequest();
             Enumeration<String> params = request.getParameterNames();
@@ -53,11 +59,6 @@ public class ControllerInterceptor {
             //args[]
             logger.info("args={}",thisJoinPoint.getArgs());
             return thisJoinPoint.proceed ();
-        } catch (Throwable e) {
-            e.printStackTrace ();
-        }finally {
-        }
-        return null;
     }
 
 }

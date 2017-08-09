@@ -13,7 +13,7 @@ import java.util.Date;
 public abstract class AbsEntity implements Serializable {
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid2")
     private String id;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -49,7 +49,7 @@ public abstract class AbsEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return id == null ? 0 : id.hashCode();
     }
 
     public String getId() {

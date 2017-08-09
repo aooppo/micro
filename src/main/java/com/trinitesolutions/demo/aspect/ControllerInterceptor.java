@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2017.  TJ
+ */
+
 package com.trinitesolutions.demo.aspect;
 
 import com.trinitesolutions.demo.exception.NormalException;

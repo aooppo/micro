@@ -32,7 +32,9 @@ public class DemoApplication {
         SimpleCacheManager cm = new SimpleCacheManager();
 	    List<Cache> cacheList = new ArrayList<>();
 	    cacheList.add(new ConcurrentMapCache("person"));
+	    cacheList.add(new ConcurrentMapCache("person2"));
 	    cm.setCaches(cacheList);
+
 	    return cm;
     }
 
